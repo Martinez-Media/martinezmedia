@@ -2,20 +2,21 @@
 
 ## What this is
 
-A **single-page archival site** for Martinez Media, LLC — <https://www.martinezmedia.net>.
-The business ran in Ludington, Michigan from February 2011 to January 2023 and is now idle.
-This page exists to tell the story and stay reachable. It is **not** a marketing site, it has
-no content cadence, and it does not need new sections. Prefer improving what is here over
-adding to it.
+A **multipage product marketing site** for Martinez Media, LLC —
+<https://www.martinezmedia.net>. The LLC is active, founded in February 2011.
+The user explicitly approved replacing the archive with a software company website:
+WaveWrangler leads, supported by a product catalog, About, historical work, support,
+and privacy pages. The photography and client-services period was 2011–2023; it is
+not the lifetime of the company. Never restore the incorrect dissolution or closure claim.
 
 ## Hard NOs
 
 - No web framework (React, Next, Astro, Svelte, Vue). No bundler. No static-site generator.
-  No CMS. No second page. No analytics.
+  No CMS. No analytics.
 - The `pre-2026-site` and `initial-site-design` branches hold an unfinished Next.js app.
   **Do not merge, cherry-pick, or revive it.** Its `content/clients/*.md` bodies are lorem
   ipsum — nothing there is safe to copy as copy. Only the client _names_ were ever real.
-- No JavaScript is required to render this page. Keep it that way: it must be complete and
+- No JavaScript is required to render any page. Keep it that way: each must be complete and
   readable with JS disabled.
 
 ## Dependency budget
@@ -44,6 +45,12 @@ vulnerabilities; if it ever doesn't, fix it rather than muting it.
 .github/workflows/deploy.yml
 src/                  <- ships
   index.html
+  products/index.html
+  products/wavewrangler/index.html
+  about/index.html
+  past-work/index.html
+  support/index.html
+  privacy/index.html
   images/
   robots.txt
   sitemap.xml
@@ -80,10 +87,19 @@ editing it unbinds the domain. The build copies it into `_site/`. Leave it alone
 
 ## Facts are facts
 
-The client names, dates, and counts on this page come from records Brandon holds. Do not
+The historical client names, dates, and counts come from records Brandon holds. Do not
 invent, round, embellish, or "tidy up" a client, a year, or a number. If a number needs to
 change, ask him for the source. The same goes for the client logos: they are the real ones,
 recovered from the old branch, and their `alt` text is the real client name.
+Client logos and counts belong on Past work, explicitly labeled historical services,
+never presented as endorsements or users of the software products.
+
+Product claims must come from the corresponding public repository documentation.
+Do not invent prices, release dates, download links, live deployments, or App Store
+availability. WaveWrangler is in development; source and documentation are the current
+calls to action. First-party MIT licensing does not cover third-party software or models.
+Print Pantry is source-available unless an open-source license is actually verified.
+Contact is `contact@martinezmedia.net`.
 
 ## The logo
 
@@ -91,9 +107,10 @@ recovered from the old branch, and their `alt` text is the real client name.
 exported from Brandon's Illustrator source and trimmed to their ink bounds. They are
 outlines, not text, so they carry the original Vectora LT look without embedding a font.
 The wordmark is inlined directly into the hero `<h1>` — inline, not `<img>`, so the
-headline paints on first render with no request and no flash of an empty hero. Its
+brand paints on first render with no request and no flash of an empty hero. Its
 accessible name comes from a visually hidden `<span>`; the `<svg>` itself is
-`aria-hidden`. Keep it that way: exactly one `<h1>`, and it must always have a text name.
+`aria-hidden`. Keep the inline homepage wordmark. Other pages can use the SVG image in
+the shared header. Every page has exactly one `<h1>` with an accessible text name.
 
 The three-colour rule under the wordmark — wine, green, navy at 50% — is the oldest
 surviving piece of the brand. It is reprised once, as the bar across the top of the
@@ -117,6 +134,7 @@ npm run build # produces _site/
 npm run clean # removes _site/ and src/styles.css
 ```
 
-Before opening a PR: `npm run build`, then confirm `_site/` contains `index.html`,
+Before committing or opening a PR: `npm run build`, then confirm `_site/` contains `index.html`,
 `styles.css`, `images/`, `robots.txt`, `sitemap.xml`, and `CNAME`; that the page has no
-horizontal overflow at 320px; and that no logo is broken.
+horizontal overflow at 320px; that internal links and product routes resolve; and that
+no logo is broken. Check desktop and mobile layouts, including with JavaScript disabled.

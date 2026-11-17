@@ -13,6 +13,9 @@
   --color-ink-faint: #7d766c;
   --color-rule: #e2d9cc;
   --color-ember: #9a6b43;
+  --color-wine: #62061e;
+  --color-navy: #21395e;
+  --color-white: #ffffff;
 
   /* The three-colour rule beneath the wordmark, carried through from the
      1990s-era logo. These are the logo's wine/green/navy at the 50% opacity
@@ -49,4 +52,103 @@
   letter-spacing: var(--tracking-widest2);
   text-transform: uppercase;
   color: var(--color-ink-faint);
+}
+
+@layer base {
+  body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); line-height: 1.65; }
+  h1, h2, h3 { line-height: 1.12; text-wrap: balance; }
+  img, svg { max-width: 100%; }
+  img { height: auto; }
+  a { text-underline-offset: .22em; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--color-navy); outline-offset: 5px; }
+  ::selection { background: var(--color-wine); color: var(--color-paper); }
+}
+
+@layer components {
+  .wrap { width: min(100% - 3rem, 76rem); margin-inline: auto; }
+  .site-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1.8rem; border-bottom: 1px solid var(--color-rule); }
+  .brand { display: block; width: 13rem; flex-shrink: 0; }
+  .site-nav { display: flex; flex-wrap: wrap; gap: .3rem 1.6rem; font-size: .9rem; }
+  .site-nav a { padding-block: .6rem; text-decoration: none; }
+  .site-nav a:hover, .site-nav [aria-current="page"] { color: var(--color-wine); text-decoration: underline; }
+  .skip { position: absolute; top: -10rem; left: 1rem; z-index: 10; padding: 1rem; background: var(--color-paper); }
+  .skip:focus { top: 1rem; }
+  .hero { padding-block: 4.5rem 3rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: end; }
+  .headline { font-size: clamp(2.6rem, 5.5vw, 5.5rem); font-weight: 650; letter-spacing: -.04em; max-width: 16ch; }
+  .page-title { font-size: clamp(2.5rem, 5vw, 4.8rem); font-weight: 650; letter-spacing: -.04em; max-width: 19ch; }
+  .lead { font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: var(--color-ink-soft); max-width: 52ch; }
+  .hero .lead { margin-top: 1.5rem; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 1.8rem; }
+  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .7rem 1.25rem; background: var(--color-wine); color: var(--color-paper); font-weight: 600; text-decoration: none; border: 1px solid var(--color-wine); border-radius: .25rem; transition: background .18s ease-out; }
+  .button:hover { background: var(--color-ink); border-color: var(--color-ink); }
+  .text-link { font-weight: 600; color: var(--color-wine); }
+  .status { display: inline-block; font-size: .82rem; font-weight: 600; color: var(--color-navy); }
+  .fine { font-size: .88rem; color: var(--color-ink-soft); }
+  .product-name { display: flex; gap: .9rem; align-items: center; margin-bottom: 1.2rem; font-weight: 650; font-size: 1.15rem; }
+  .product-icon { width: 3rem; height: 3rem; border-radius: .6rem; }
+  .workspace { margin-block: 2.5rem 0; }
+  .workspace img { display: block; width: 100%; border: 1px solid var(--color-ink-soft); border-radius: .5rem; box-shadow: 0 16px 35px -22px var(--color-ink-soft); }
+  figcaption { margin-top: .8rem; font-size: .85rem; color: var(--color-ink-soft); }
+  .section { padding-block: 5rem; border-top: 1px solid var(--color-rule); }
+  .section-title { font-size: clamp(1.9rem, 3.2vw, 3rem); font-weight: 600; letter-spacing: -.035em; max-width: 24ch; margin-bottom: 1.5rem; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .prose { max-width: 70ch; }
+  .prose p + p { margin-top: 1.25rem; }
+  .prose h2 { margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.8rem; font-weight: 600; letter-spacing: -.02em; }
+  .prose a { color: var(--color-wine); text-decoration: underline; }
+  .feature-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .feature-list h3 { margin-bottom: .85rem; font-weight: 600; font-size: 1.3rem; }
+  .feature-list p { color: var(--color-ink-soft); }
+  .tint { background: var(--color-paper-deep); }
+  .catalog-item { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; border-top: 1px solid var(--color-rule); padding-block: 2.75rem; }
+  .catalog-item h2 { font-size: 2rem; letter-spacing: -.03em; margin-bottom: .8rem; font-weight: 600; }
+  .catalog-item p { max-width: 62ch; }
+  .catalog-item .status { margin-top: .4rem; }
+  .callout { padding: 2rem; background: var(--color-paper-deep); border: 1px solid var(--color-rule); }
+  .callout h2, .callout h3 { font-weight: 600; font-size: 1.5rem; margin-bottom: 1rem; }
+  .steps { padding-left: 1.4rem; list-style: decimal; }
+  .steps li { padding-left: .5rem; margin-block: 1rem; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .stats dd { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; font-weight: 600; }
+  .stats dt { color: var(--color-ink-soft); font-size: .9rem; }
+  .clients { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 2rem; }
+  .clients li { display: grid; place-items: center; aspect-ratio: 1; background: var(--color-white); padding: 1.5rem; border: 1px solid var(--color-rule); }
+  .clients img { width: 100%; height: 100%; object-fit: contain; }
+  .contact-band { background: var(--color-navy); color: var(--color-paper); }
+  .contact-band .lead, .contact-band .fine { color: var(--color-paper); }
+  .contact-band a { color: var(--color-paper); overflow-wrap: anywhere; }
+  .footer-rule { height: 2px; display: flex; }
+  .footer-rule span { flex: 1; background: var(--color-brand-wine); }
+  .footer-rule span:nth-child(2) { background: var(--color-brand-green); }
+  .footer-rule span:nth-child(3) { background: var(--color-brand-navy); }
+  .footer-inner { display: flex; justify-content: space-between; gap: 2rem; padding-block: 2.5rem; font-size: .85rem; color: var(--color-ink-soft); }
+  .footer-links { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; }
+  .breadcrumb { margin-bottom: 2rem; font-size: .88rem; color: var(--color-ink-soft); }
+  .breadcrumb a { text-decoration: underline; }
+  details { border-top: 1px solid var(--color-rule); padding-block: 1.3rem; }
+  summary { cursor: pointer; font-size: 1.1rem; font-weight: 600; }
+  details p { margin-top: 1rem; max-width: 65ch; }
+  .email { overflow-wrap: anywhere; }
+  @media (max-width: 700px) {
+    .wrap { width: min(100% - 2.5rem, 76rem); }
+    .site-header { align-items: start; flex-direction: column; gap: .8rem; padding-block: 1.3rem; }
+    .site-nav { gap: .1rem 1.1rem; font-size: .85rem; }
+    .hero { padding-block: 3rem 2.5rem; }
+    .hero-grid, .split, .catalog-item { grid-template-columns: 1fr; gap: 1.5rem; }
+    .feature-list { grid-template-columns: 1fr; gap: 2rem; }
+    .section { padding-block: 3rem; }
+    .headline { font-size: clamp(2.4rem, 9.5vw, 4rem); }
+    .stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .clients { grid-template-columns: repeat(2, 1fr); gap: .7rem; }
+    .clients li { padding: 1rem; }
+    .footer-inner { flex-direction: column; gap: 1rem; }
+    .callout { padding: 1.4rem; }
+    .workspace { margin-top: 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .button { transition: none; }
+  }
 }
