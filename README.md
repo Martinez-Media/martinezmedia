@@ -30,7 +30,7 @@ browser refreshes. Pages live in route directories under `src/`.
 | `npm run dev`   | Watch CSS + serve `src/` with live reload on port 4173             |
 | `npm run build` | Compile minified CSS, then assemble `_site/` (the deploy artifact) |
 | `npm run css`   | Compile `styles/tailwind.css` to `src/styles.css` once             |
-| `npm run check` | Check the built routes, local links, assets, metadata, and sitemap |
+| `npm run check` | Test appearance preferences; check built routes, links, assets, and metadata |
 | `npm run clean` | Delete `_site/` and `src/styles.css`                               |
 
 ## Layout
@@ -46,6 +46,7 @@ src/                           everything that ships
   past-work/                   historical services, counts, and client logos
   support/                     documentation, issue trackers, and contact
   privacy/                     website and scoped WaveWrangler privacy information
+  theme.js                     optional, dependency-free appearance preference
   images/clients/              historical client logos
   images/products/             authentic product branding and screenshots
   images/                      brand SVGs, favicon, apple touch icon, Open Graph image
@@ -66,10 +67,17 @@ committed so CI installs the exact same tree.
 Tailwind CSS v4 via `@tailwindcss/cli`. There is no `tailwind.config.js` — the palette,
 fonts, and custom utilities are declared in the `@theme` block in `styles/tailwind.css`.
 
+The Lake & Signal palette uses paired `light-dark()` tokens and native `color-scheme`.
+Without JavaScript, every page follows the device setting. An optional early script
+restores a saved System / Light / Dark choice before the stylesheet paints, then enables
+the footer's Appearance control. Only that choice is stored locally; storage failures
+are logged and do not prevent changing the current page. Original logos and screenshots
+are never inverted; the company wordmark gets a light backing in dark mode.
+
 ## Deploying
 
 Pushing to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml),
-which runs `npm ci && npm run build` and publishes `_site/` to GitHub Pages. Nothing else
+which runs `npm ci && npm run build && npm run check` and publishes `_site/` to GitHub Pages. Nothing else
 needs to be done by hand.
 
 `CNAME` lives at the repo root, is copied into `_site/` by the build, and must not be

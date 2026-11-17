@@ -18,6 +18,8 @@ not the lifetime of the company. Never restore the incorrect dissolution or clos
   ipsum — nothing there is safe to copy as copy. Only the client _names_ were ever real.
 - No JavaScript is required to render any page. Keep it that way: each must be complete and
   readable with JS disabled.
+- `src/theme.js` is optional progressive enhancement for the footer Appearance selector.
+  Keep automatic system light/dark styling in CSS, and preserve JS-disabled rendering.
 
 ## Dependency budget
 
@@ -68,6 +70,9 @@ Never commit `_site/` or `src/styles.css`. Always commit `package-lock.json`.
 `@tailwindcss/cli`, and `styles/tailwind.css` is just `@import "tailwindcss";` plus
 `@source` and `@theme`. There is **no `tailwind.config.js`** — theming (colours, fonts)
 goes in the `@theme` block. Most tutorials still show the v3 shape; do not copy it.
+The user selected Lake & Signal: blue/teal actions, lake/navy surfaces, coral accents.
+Paired `light-dark()` tokens follow native `color-scheme`; never invert product images
+or original logos to implement dark mode. Document appearance storage on the privacy page.
 
 ## Deploys
 

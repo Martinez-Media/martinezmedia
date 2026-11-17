@@ -8,7 +8,7 @@
     "css": "tailwindcss -i ./styles/tailwind.css -o ./src/styles.css",
     "dev": "concurrently -k \"npm:css -- --watch\" \"vite src --port 4173 --open\"",
     "build": "npm run css -- --minify && rm -rf _site && mkdir -p _site && cp -R src/. _site/ && cp CNAME _site/",
-    "check": "node scripts/check-site.mjs",
+    "check": "node --test scripts/theme.test.mjs && node scripts/check-site.mjs",
     "clean": "rm -rf _site src/styles.css"
   },
   "devDependencies": {

@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#faf7f2"/>
+  <rect width="1200" height="630" fill="#f1f7fc"/>
   <image href="logo-wordmark.svg" x="80" y="65" width="410" height="53"/>
-  <g fill="#1b1917" font-family="Helvetica, Arial, sans-serif">
+  <g fill="#102c46" font-family="Helvetica, Arial, sans-serif">
     <text x="80" y="260" font-size="68" font-weight="700" letter-spacing="-2">Independent software,</text>
     <text x="80" y="340" font-size="68" font-weight="700" letter-spacing="-2">thoughtfully made.</text>
-    <text x="80" y="440" font-size="30" fill="#4a443d">Meet WaveWrangler. Your recordings. One conversation.</text>
-    <text x="80" y="540" font-size="23" fill="#62061e">www.martinezmedia.net</text>
+    <text x="80" y="440" font-size="30" fill="#36516b">Meet WaveWrangler. Your recordings. One conversation.</text>
+    <text x="80" y="540" font-size="23" fill="#006d8f">www.martinezmedia.net</text>
   </g>
   <path d="M0 628H400" stroke="#ae7e88" stroke-width="4"/>
   <path d="M400 628H800" stroke="#8dac91" stroke-width="4"/>

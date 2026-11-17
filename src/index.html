@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- THESIS: Software worth making, shown through the real work, not invented proof.
-OWN-WORLD: Authentic Martinez wordmark, paper, ink, wine actions and sparse tricolor.
+OWN-WORLD: Authentic wordmark, Lake & Signal light/dark, blue actions, sparse tricolor.
 STORY: Meet WaveWrangler, inspect its workspace, explore source and related products.
 FIRST VIEWPORT: Brand and navigation, large promise at left, product context at right,
 then a full-width real episode workspace. FORM: Brief-pinned screenshot-led marketing. -->
@@ -11,7 +11,9 @@ then a full-width real episode workspace. FORM: Brief-pinned screenshot-led mark
     <title>Martinez Media | Independent software, thoughtfully made</title>
     <meta name="description" content="Independent software from Martinez Media. Meet WaveWrangler, a local-first podcast editor for Mac, and explore our growing collection of practical products." />
     <link rel="canonical" href="https://www.martinezmedia.net/" />
-    <meta name="theme-color" content="#faf7f2" />
+    <meta name="theme-color" content="#f1f7fc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1725" media="(prefers-color-scheme: dark)" />
+    <script src="/theme.js"></script>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Martinez Media" />
     <meta property="og:title" content="Martinez Media | Independent software, thoughtfully made" />
@@ -99,7 +101,7 @@ then a full-width real episode workspace. FORM: Brief-pinned screenshot-led mark
     </main>
     <footer>
       <div class="footer-rule" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="footer-inner wrap"><p>&copy; 2026 Martinez Media, LLC. Independent since 2011.</p><nav class="footer-links" aria-label="Footer"><a href="https://github.com/Martinez-Media">GitHub</a><a href="/support/">Support &amp; contact</a><a href="/privacy/">Privacy</a></nav></div>
+      <div class="footer-inner wrap"><p>&copy; 2026 Martinez Media, LLC. Independent since 2011.</p><nav class="footer-links" aria-label="Footer"><a href="https://github.com/Martinez-Media">GitHub</a><a href="/support/">Support &amp; contact</a><a href="/privacy/">Privacy</a></nav><label class="theme-switch" data-theme-control hidden>Appearance <select name="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></div>
     </footer>
   </body>
 </html>

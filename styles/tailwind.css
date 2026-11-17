@@ -5,24 +5,27 @@
 @source "../src/**/*.html";
 
 @theme {
-  /* Warm paper palette — restrained, print-like, lets the logos carry colour. */
-  --color-paper: #faf7f2;
-  --color-paper-deep: #f2ece3;
-  --color-ink: #1b1917;
-  --color-ink-soft: #4a443d;
-  --color-ink-faint: #7d766c;
-  --color-rule: #e2d9cc;
-  --color-ember: #9a6b43;
-  --color-wine: #62061e;
-  --color-navy: #21395e;
+  /* Lake & Signal: paired roles follow color-scheme, including without JS. */
+  --color-paper: light-dark(#f1f7fc, #0b1725);
+  --color-paper-deep: light-dark(#dceaf5, #132c40);
+  --color-ink: light-dark(#102c46, #edf6fc);
+  --color-ink-soft: light-dark(#36516b, #b6ccde);
+  --color-ink-faint: light-dark(#47647d, #9cb7cb);
+  --color-rule: light-dark(#bcd0df, #29465e);
+  --color-action: light-dark(#006d8f, #68d5eb);
+  --color-action-hover: light-dark(#00536e, #a4e8f4);
+  --color-on-action: light-dark(#ffffff, #0b1725);
+  --color-accent: light-dark(#db6a3c, #ffb08a);
+  --color-band: light-dark(#123e58, #153e55);
+  --color-on-band: #edf6fc;
+  --color-logo-paper: light-dark(transparent, #f1f7fc);
   --color-white: #ffffff;
 
   /* The three-colour rule beneath the wordmark, carried through from the
-     1990s-era logo. These are the logo's wine/green/navy at the 50% opacity
-     the mark uses, pre-blended over --color-paper. */
-  --color-brand-wine: #ae7e88;
-  --color-brand-green: #8dac91;
-  --color-brand-navy: #8d98a8;
+     1990s-era logo, blended over the active canvas at the original 50%. */
+  --color-brand-wine: color-mix(in srgb, #62061e 50%, var(--color-paper));
+  --color-brand-green: color-mix(in srgb, #216130 50%, var(--color-paper));
+  --color-brand-navy: color-mix(in srgb, #21395e 50%, var(--color-paper));
 
   --font-display:
     "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
@@ -35,12 +38,15 @@
 }
 
 @layer base {
+  :root { color-scheme: light dark; }
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
   html {
     scroll-behavior: smooth;
   }
   ::selection {
-    background-color: var(--color-ember);
-    color: var(--color-paper);
+    background-color: var(--color-action);
+    color: var(--color-on-action);
   }
 }
 
@@ -61,17 +67,16 @@
   img { height: auto; }
   a { text-underline-offset: .22em; }
   a:hover { text-decoration-thickness: 2px; }
-  :focus-visible { outline: 3px solid var(--color-navy); outline-offset: 5px; }
-  ::selection { background: var(--color-wine); color: var(--color-paper); }
+  :focus-visible { outline: 3px solid var(--color-action); outline-offset: 5px; }
 }
 
 @layer components {
   .wrap { width: min(100% - 3rem, 76rem); margin-inline: auto; }
   .site-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1.8rem; border-bottom: 1px solid var(--color-rule); }
-  .brand { display: block; width: 13rem; flex-shrink: 0; }
+  .brand { display: block; width: 14.5rem; padding: .65rem .75rem; margin-left: -.75rem; flex-shrink: 0; background: var(--color-logo-paper); border-radius: .3rem; }
   .site-nav { display: flex; flex-wrap: wrap; gap: .3rem 1.6rem; font-size: .9rem; }
   .site-nav a { padding-block: .6rem; text-decoration: none; }
-  .site-nav a:hover, .site-nav [aria-current="page"] { color: var(--color-wine); text-decoration: underline; }
+  .site-nav a:hover, .site-nav [aria-current="page"] { color: var(--color-action); text-decoration: underline; }
   .skip { position: absolute; top: -10rem; left: 1rem; z-index: 10; padding: 1rem; background: var(--color-paper); }
   .skip:focus { top: 1rem; }
   .hero { padding-block: 4.5rem 3rem; }
@@ -81,15 +86,15 @@
   .lead { font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: var(--color-ink-soft); max-width: 52ch; }
   .hero .lead { margin-top: 1.5rem; }
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 1.8rem; }
-  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .7rem 1.25rem; background: var(--color-wine); color: var(--color-paper); font-weight: 600; text-decoration: none; border: 1px solid var(--color-wine); border-radius: .25rem; transition: background .18s ease-out; }
-  .button:hover { background: var(--color-ink); border-color: var(--color-ink); }
-  .text-link { font-weight: 600; color: var(--color-wine); }
-  .status { display: inline-block; font-size: .82rem; font-weight: 600; color: var(--color-navy); }
+  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .7rem 1.25rem; background: var(--color-action); color: var(--color-on-action); font-weight: 600; text-decoration: none; border: 1px solid var(--color-action); border-radius: .25rem; transition: background .18s ease-out; }
+  .button:hover { background: var(--color-action-hover); border-color: var(--color-action-hover); }
+  .text-link { font-weight: 600; color: var(--color-action); }
+  .status { display: inline-block; font-size: .82rem; font-weight: 600; color: var(--color-action); }
   .fine { font-size: .88rem; color: var(--color-ink-soft); }
   .product-name { display: flex; gap: .9rem; align-items: center; margin-bottom: 1.2rem; font-weight: 650; font-size: 1.15rem; }
   .product-icon { width: 3rem; height: 3rem; border-radius: .6rem; }
   .workspace { margin-block: 2.5rem 0; }
-  .workspace img { display: block; width: 100%; border: 1px solid var(--color-ink-soft); border-radius: .5rem; box-shadow: 0 16px 35px -22px var(--color-ink-soft); }
+  .workspace img { display: block; width: 100%; border: 1px solid var(--color-rule); border-radius: .5rem; box-shadow: 0 16px 35px -22px #0b172560; }
   figcaption { margin-top: .8rem; font-size: .85rem; color: var(--color-ink-soft); }
   .section { padding-block: 5rem; border-top: 1px solid var(--color-rule); }
   .section-title { font-size: clamp(1.9rem, 3.2vw, 3rem); font-weight: 600; letter-spacing: -.035em; max-width: 24ch; margin-bottom: 1.5rem; }
@@ -97,11 +102,12 @@
   .prose { max-width: 70ch; }
   .prose p + p { margin-top: 1.25rem; }
   .prose h2 { margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.8rem; font-weight: 600; letter-spacing: -.02em; }
-  .prose a { color: var(--color-wine); text-decoration: underline; }
+  .prose a { color: var(--color-action); text-decoration: underline; }
   .feature-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
   .feature-list h3 { margin-bottom: .85rem; font-weight: 600; font-size: 1.3rem; }
   .feature-list p { color: var(--color-ink-soft); }
   .tint { background: var(--color-paper-deep); }
+  .tint .section-title { text-decoration: underline; text-decoration-color: var(--color-accent); text-decoration-thickness: .09em; text-underline-offset: .2em; }
   .catalog-item { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; border-top: 1px solid var(--color-rule); padding-block: 2.75rem; }
   .catalog-item h2 { font-size: 2rem; letter-spacing: -.03em; margin-bottom: .8rem; font-weight: 600; }
   .catalog-item p { max-width: 62ch; }
@@ -116,15 +122,18 @@
   .clients { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 2rem; }
   .clients li { display: grid; place-items: center; aspect-ratio: 1; background: var(--color-white); padding: 1.5rem; border: 1px solid var(--color-rule); }
   .clients img { width: 100%; height: 100%; object-fit: contain; }
-  .contact-band { background: var(--color-navy); color: var(--color-paper); }
-  .contact-band .lead, .contact-band .fine { color: var(--color-paper); }
-  .contact-band a { color: var(--color-paper); overflow-wrap: anywhere; }
+  .contact-band { background: var(--color-band); color: var(--color-on-band); }
+  .contact-band .lead, .contact-band .fine { color: var(--color-on-band); }
+  .contact-band a { color: var(--color-on-band); overflow-wrap: anywhere; }
+  .contact-band :focus-visible { outline-color: var(--color-on-band); }
   .footer-rule { height: 2px; display: flex; }
   .footer-rule span { flex: 1; background: var(--color-brand-wine); }
   .footer-rule span:nth-child(2) { background: var(--color-brand-green); }
   .footer-rule span:nth-child(3) { background: var(--color-brand-navy); }
-  .footer-inner { display: flex; justify-content: space-between; gap: 2rem; padding-block: 2.5rem; font-size: .85rem; color: var(--color-ink-soft); }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 2rem; padding-block: 2.5rem; font-size: .85rem; color: var(--color-ink-soft); }
   .footer-links { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; }
+  .theme-switch:not([hidden]) { display: inline-flex; align-items: center; gap: .65rem; }
+  .theme-switch select { min-height: 2.75rem; max-width: 100%; padding: .4rem .6rem; border: 1px solid var(--color-ink-faint); border-radius: .25rem; background: var(--color-paper-deep); color: var(--color-ink); font: inherit; }
   .breadcrumb { margin-bottom: 2rem; font-size: .88rem; color: var(--color-ink-soft); }
   .breadcrumb a { text-decoration: underline; }
   details { border-top: 1px solid var(--color-rule); padding-block: 1.3rem; }

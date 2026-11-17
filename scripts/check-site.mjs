@@ -18,7 +18,7 @@ async function filesIn(directory) {
   return files.flat();
 }
 
-for (const required of ["index.html", "styles.css", "images", "robots.txt", "sitemap.xml", "CNAME"]) {
+for (const required of ["index.html", "styles.css", "theme.js", "images", "robots.txt", "sitemap.xml", "CNAME"]) {
   await stat(path.join(root, required));
 }
 assert.equal(await readFile(path.join(root, "CNAME"), "utf8"), await readFile("CNAME", "utf8"));
@@ -39,8 +39,12 @@ for (const [file, html] of documents) {
   assert.match(html, /id="main"/);
   assert(html.includes(`<link rel="canonical" href="${url.href}"`), `${file}: incorrect canonical`);
   assert(!/dissolutionDate|mostly idle|wound the LLC down|business is idle/i.test(html), `${file}: stale company claim`);
+  assert.equal((html.match(/<script src="\/theme\.js"><\/script>/g) ?? []).length, 1, `${file}: expected one theme enhancement`);
+  assert(html.indexOf('<script src="/theme.js">') < html.indexOf('<link rel="stylesheet"'), `${file}: restore preference before CSS paints`);
+  assert.match(html, /data-theme-control hidden>Appearance <select name="theme"><option value="system">System<\/option><option value="light">Light<\/option><option value="dark">Dark<\/option><\/select>/);
   for (const script of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
-    assert.match(script[1], /type="application\/ld\+json"/, `${file}: executable JavaScript is not needed`);
+    if (script[1] === ' src="/theme.js"' && script[2] === "") continue;
+    assert.match(script[1], /^\s+type="application\/ld\+json"\s*$/, `${file}: only theme enhancement and structured data are allowed`);
     JSON.parse(script[2]);
   }
   for (const image of html.matchAll(/<img\b[^>]*>/g)) {
