@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#f1f7fc"/>
-  <image href="logo-wordmark.svg" x="80" y="65" width="410" height="53"/>
+  <image href="logo-wordmark-light.svg" x="80" y="65" width="410" height="53"/>
   <g fill="#102c46" font-family="Helvetica, Arial, sans-serif">
     <text x="80" y="260" font-size="68" font-weight="700" letter-spacing="-2">Independent software,</text>
     <text x="80" y="340" font-size="68" font-weight="700" letter-spacing="-2">thoughtfully made.</text>

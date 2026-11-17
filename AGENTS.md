@@ -108,14 +108,19 @@ Contact is `contact@martinezmedia.net`.
 
 ## The logo
 
-`src/images/logo-wordmark.svg` and `logo-mark.svg` are the genuine Martinez Media marks,
-exported from Brandon's Illustrator source and trimmed to their ink bounds. They are
+`src/images/logo-wordmark-light.svg`, `logo-wordmark-dark.svg`, and `logo-mark.svg`
+are the genuine Martinez Media marks, exported from Brandon's Illustrator source
+and trimmed to their ink bounds. The wordmarks are his supplied Wide Logo Light Mode
+and Dark Mode exports; preserve their original paths and colors. They are
 outlines, not text, so they carry the original Vectora LT look without embedding a font.
 The wordmark is inlined directly into the hero `<h1>` — inline, not `<img>`, so the
 brand paints on first render with no request and no flash of an empty hero. Its
 accessible name comes from a visually hidden `<span>`; the `<svg>` itself is
-`aria-hidden`. Keep the inline homepage wordmark. Other pages can use the SVG image in
-the shared header. Every page has exactly one `<h1>` with an accessible text name.
+`aria-hidden`. Keep both inline homepage variants and the single text name.
+Other pages use both SVG images in the shared header. CSS shows only the variant
+matching the effective appearance, including system mode without JavaScript.
+Do not restore the light backing in dark mode. Every page has exactly one `<h1>`
+with an accessible text name.
 
 The three-colour rule under the wordmark — wine, green, navy at 50% — is the oldest
 surviving piece of the brand. It is reprised once, as the bar across the top of the

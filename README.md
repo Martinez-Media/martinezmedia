@@ -72,7 +72,8 @@ Without JavaScript, every page follows the device setting. An optional early scr
 restores a saved System / Light / Dark choice before the stylesheet paints, then enables
 the footer's Appearance control. Only that choice is stored locally; storage failures
 are logged and do not prevent changing the current page. Original logos and screenshots
-are never inverted; the company wordmark gets a light backing in dark mode.
+are never inverted. The company wordmark uses the supplied light and dark SVG exports,
+selected in CSS to match the effective appearance, including without JavaScript.
 
 ## Deploying
 
@@ -88,7 +89,10 @@ continues to use `https://www.martinezmedia.net/`.
 
 ## Asset provenance
 
-The Martinez Media SVGs are the original outlined artwork. Product assets are copied
+The Martinez Media SVGs are the original outlined artwork. `logo-wordmark-light.svg`
+and `logo-wordmark-dark.svg` come from the corresponding Wide Logo Light Mode and
+Dark Mode exports, with only their outer SVG bounds trimmed to the artwork. Both
+variants are inlined on the homepage and served as images on other pages. Product assets are copied
 from WaveWrangler's `docs/assets/branding/wavewrangler-logo.svg` and
 `docs/assets/screenshots/episode-workspace.png`; the screenshot contains synthetic demo
 content, not private recordings. Historical client marks retain their original names.
@@ -99,7 +103,7 @@ ImageMagick installed, run from `src/images/`:
 
 ```sh
 magick -background none opengraph.svg \
-  \( -background none logo-wordmark.svg -resize 410x53 \) \
+  \( -background none logo-wordmark-light.svg -resize 410x53 \) \
   -geometry +80+65 -composite opengraph.png
 ```
 

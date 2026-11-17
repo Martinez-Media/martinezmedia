@@ -26,12 +26,28 @@ assert.equal(await readFile(path.join(root, "CNAME"), "utf8"), await readFile("C
 const files = (await filesIn(root)).filter((file) => file.endsWith(".html"));
 assert.equal(files.length, routes.length, "Unexpected number of HTML pages");
 const documents = new Map(await Promise.all(files.map(async (file) => [file, await readFile(file, "utf8")])));
+const wordmarks = new Map(await Promise.all(["light", "dark"].map(async (theme) => [
+  theme, await readFile(path.join(root, `images/logo-wordmark-${theme}.svg`), "utf8"),
+])));
+const normalizeIndent = (markup) => markup.replace(/^\s+/gm, "").trim();
 let links = 0;
 for (const [file, html] of documents) {
   const route = `/${path.relative(root, path.dirname(file)).split(path.sep).filter(Boolean).join("/")}`;
   const url = new URL(route === "/" ? "/" : `${route}/`, origin);
   assert(routes.includes(url.pathname), `Unexpected route ${url.pathname}`);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1, `${file}: expected one h1`);
+  const header = html.match(/<header\b[^>]*>([\s\S]*?)<\/header>/)?.[1];
+  assert(header, `${file}: missing header`);
+  for (const [theme, artwork] of wordmarks) {
+    assert.equal((header.match(new RegExp(`class="brand-${theme}"`, "g")) ?? []).length, 1, `${file}: expected one ${theme} wordmark`);
+    if (url.pathname === "/") {
+      const inline = header.match(new RegExp(`<svg class="brand-${theme}"[^>]*>([\\s\\S]*?)<\\/svg>`));
+      assert(inline?.[0].includes('aria-hidden="true"'), `${file}: wordmark needs a separate text name`);
+      assert.equal(normalizeIndent(inline[1]), normalizeIndent(artwork.match(/<svg\b[^>]*>([\s\S]*?)<\/svg>/)[1]), `${file}: inline ${theme} wordmark differs from the supplied asset`);
+    } else {
+      assert(header.includes(`class="brand-${theme}" src="/images/logo-wordmark-${theme}.svg" alt="Martinez Media, LLC"`), `${file}: incorrect ${theme} wordmark`);
+    }
+  }
   assert.match(html, /<html lang="en">/);
   assert.match(html, /<meta name="viewport"/);
   assert.match(html, /<meta name="description" content="[^"]+"/);

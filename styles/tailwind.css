@@ -18,7 +18,6 @@
   --color-accent: light-dark(#db6a3c, #ffb08a);
   --color-band: light-dark(#123e58, #153e55);
   --color-on-band: #edf6fc;
-  --color-logo-paper: light-dark(transparent, #f1f7fc);
   --color-white: #ffffff;
 
   /* The three-colour rule beneath the wordmark, carried through from the
@@ -73,7 +72,16 @@
 @layer components {
   .wrap { width: min(100% - 3rem, 76rem); margin-inline: auto; }
   .site-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1.8rem; border-bottom: 1px solid var(--color-rule); }
-  .brand { display: block; width: 14.5rem; padding: .65rem .75rem; margin-left: -.75rem; flex-shrink: 0; background: var(--color-logo-paper); border-radius: .3rem; }
+  .brand { display: block; width: 16rem; max-width: 100%; flex-shrink: 0; }
+  .brand svg { width: 100%; height: auto; }
+  .brand-light { display: block; }
+  .brand-dark { display: none; }
+  :root[data-theme="dark"] .brand-light { display: none; }
+  :root[data-theme="dark"] .brand-dark { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .brand-light { display: none; }
+    :root:not([data-theme="light"]) .brand-dark { display: block; }
+  }
   .site-nav { display: flex; flex-wrap: wrap; gap: .3rem 1.6rem; font-size: .9rem; }
   .site-nav a { padding-block: .6rem; text-decoration: none; }
   .site-nav a:hover, .site-nav [aria-current="page"] { color: var(--color-action); text-decoration: underline; }
